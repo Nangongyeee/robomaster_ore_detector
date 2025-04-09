@@ -12,6 +12,6 @@ ros2 run rviz2 rviz2 -d /home/usrname/robomaster_ore_detector/src/ore_detector/c
 
 ## 仿真效果
 
-![image-20250409210343486](/home/xty/.config/Typora/typora-user-images/image-20250409210343486.png)
+![image-20250409210343486](doc/gazebo.png)
 ## rviz2可视化
-![image-20250409210407024](/home/xty/.config/Typora/typora-user-images/image-20250409210407024.png)
+![image-20250409210407024](doc/rviz2.png)
