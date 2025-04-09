@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot>
+
+<gazebo reference="hokuyo">
+      <sensor type="ray" name="lidar">
+        <pose>0 0 0.075 0 0 0</pose>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.141</min_angle>
+              <max_angle>3.141</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        
+        <plugin name="laserscan" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <!-- <namespace>/tb3</namespace> -->
+          <remapping>~/out:=hokuyo/lidar</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>hokuyo</frame_name>
+      </plugin>
+      </sensor>
+    </gazebo>
+
+
+</robot>

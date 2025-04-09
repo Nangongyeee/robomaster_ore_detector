@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="wuthering_waves" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find wuthering_waves)/urdf/slam_bot.gazebo.xacro" />
+
+  <link name="base_footprint"></link>
+  <joint name="base_link_joint" type="fixed">
+        <origin xyz="0 0 0.05" rpy="0 0 0" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+    </joint>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.2 0.2 0.1" />
+            </geometry>
+            <material name="yellow" />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" />
+           
+        </collision>
+        <inertial>
+            <!-- Inertia from CAD model, filled box assumption -->
+            <origin xyz="-0.01103 0 0.002" rpy="0 0 0" />
+            <geometry>
+                <box size="0.2 0.2 0.1" />
+            </geometry>
+            <mass value="2.844" />
+            <inertia ixx="0.018819942" ixy="0" ixz="-0.000101519" iyy="0.057333716" iyz="0" izz="0.074201740" />
+        </inertial>
+  </link>
+  <link
+    name="camera">
+    <inertial>
+      <origin
+        xyz="-0.0050423 0 0.01"
+        rpy="0 0 0" />
+      <mass
+        value="0.003959" />
+      <inertia
+        ixx="2.6388E-07"
+        ixy="1.0006E-21"
+        ixz="6.9411E-22"
+        iyy="1.6457E-07"
+        iyz="-8.1106E-24"
+        izz="1.6457E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+    </collision>
+  </link>
+  <joint
+    name="joint_camera"
+    type="fixed">
+    <origin
+      xyz="0.15 0 0.03"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link name="camera_depth_optical_frame" />
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0 0 0" />
+    <parent link="camera"/>
+    <child link="camera_depth_optical_frame" />
+  </joint>
+
+  <!--laser_link-->
+  <link name="hokuyo">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+
+      <material name="red">
+        <color rgba="1.0 0 0 1.0"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.00 0.0 0.0" rpy="0 1.57 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo"/>
+  </joint>
+
+</robot>
